@@ -2,6 +2,7 @@ package evan.chen.tutorial.tdd.uitestsample
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.action.ViewActions.typeText
@@ -30,8 +31,9 @@ class RegisterTest {
 
         onView(withText("註冊成功")).check(matches(isDisplayed()))
 
-        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        device.pressBack()
+//        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+//        device.pressBack()
+        pressBack()
 
         onView(withText("註冊")).check(matches(isDisplayed()))
 
