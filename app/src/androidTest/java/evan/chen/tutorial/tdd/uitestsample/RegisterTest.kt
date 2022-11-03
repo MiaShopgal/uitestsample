@@ -1,5 +1,6 @@
 package evan.chen.tutorial.tdd.uitestsample
 
+import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.click
@@ -9,6 +10,7 @@ import android.support.test.espresso.matcher.RootMatchers.isDialog
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
+import android.support.test.uiautomator.UiDevice
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,6 +21,22 @@ class RegisterTest {
     @JvmField
     var activityActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
+    @Test
+    fun testBackToRegisterViewAfterRegistrationSuccess(){
+
+        inputRightRegisterData()
+
+        onView(withId(R.id.send)).perform(click())
+
+        onView(withText("註冊成功")).check(matches(isDisplayed()))
+
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.pressBack()
+
+        onView(withText("註冊")).check(matches(isDisplayed()))
+
+    }
+    
     @Test
     fun rightPassword_should_startActivity() {
 
